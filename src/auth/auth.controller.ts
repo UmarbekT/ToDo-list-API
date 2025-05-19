@@ -1,29 +1,25 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Patch,
-  Param,
-  Delete,
   Req,
   Res,
   HttpStatus,
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/register.dto';
-import { UpdateAuthDto } from './dto/login.dto';
 import { Response } from 'express';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AuthGuard } from './auth.guard';
+import { RegisterAuthDto } from './dto/register.dto';
+import { LoginAuthDto } from './dto/login.dto';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   @Post('register')
   async create(
-    @Body() createAuthDto: CreateAuthDto,
+    @Body() createAuthDto: RegisterAuthDto,
     @Req() req: any,
     @Res() res: Response,
   ) {
@@ -48,13 +44,13 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Post('login')
   async login(
-    @Body() updateAuthDto: UpdateAuthDto,
+    @Body() loginAuthDto: LoginAuthDto,
     @Req() req: any,
     @Res() res: Response,
   ) {
     try {
-      // const user = await this.authService.login(updateAuthDto);
-      // res.status(HttpStatus.OK).json({ status: 'Succes', data: user });
+      const user = await this.authService.login(loginAuthDto);
+      res.status(HttpStatus.OK).json({ status: 'Succes', data: user });
     } catch (error) {
       console.log(error);
 

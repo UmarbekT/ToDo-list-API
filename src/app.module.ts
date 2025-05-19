@@ -5,6 +5,7 @@ import { User } from './users/entities/user.entity';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TodoModule } from './todo/todo.module';
+import { GraphqlModule } from './graphql/graphql.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TodoModule } from './todo/todo.module';
     UsersModule,
     AuthModule,
     TodoModule,
+    GraphqlModule,
   ],
   controllers: [],
   providers: [],

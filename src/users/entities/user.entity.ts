@@ -6,17 +6,19 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
   @Column({ nullable: false, select: false })
-  name: string;
+  username: string;
   @Column({ nullable: false, unique: true })
   email: string;
   @Column({ nullable: false, select: false })
   password: string;
-  @Column({ nullable: false, select: false })
+  @Column({ select: false, default: 'user' })
   role: string;
   @Column({ nullable: false, select: false })
   createdAt: Date;
-  @Column({ nullable: false, select: false })
+  @Column({ default: true })
   isactive: boolean;
+  @Column({ nullable: true, select: false })
+  refreshToken: string;
 
   @BeforeInsert()
   async hashPassword() {

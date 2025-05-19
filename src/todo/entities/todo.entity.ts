@@ -15,6 +15,14 @@ export class Todo {
   completed: boolean;
   @Column()
   userId: number;
+  @Column({
+    type: 'enum',
+    enum: ['active', 'completed', 'deleted'],
+    default: 'active',
+  })
+  status: 'active' | 'completed' | 'deleted';
   @Column()
   createdAt: Date;
+  @Column({ default: true })
+  isActive: boolean;
 }
